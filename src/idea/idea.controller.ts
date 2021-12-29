@@ -6,7 +6,9 @@ import {
   Param,
   Post,
   Put,
+  UsePipes,
 } from '@nestjs/common';
+import { ValidationPipe } from 'src/shared/validation.pipe';
 import { ideaDto } from './dto/idea.dto';
 import { IdeaService } from './idea.service';
 
@@ -20,6 +22,7 @@ export class IdeaController {
   }
 
   @Post()
+  @UsePipes(new ValidationPipe())
   createIdea(@Body() data: ideaDto) {
     return this.ideaService.create(data);
   }
@@ -30,6 +33,7 @@ export class IdeaController {
   }
 
   @Put(':id')
+  @UsePipes(new ValidationPipe())
   updateIdea(@Param('id') id: string, @Body() data: Partial<ideaDto>) {
     return this.ideaService.update(id, data);
   }
