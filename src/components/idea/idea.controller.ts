@@ -27,7 +27,7 @@ export class IdeaController {
   @Post()
   @UseGuards(new AuthGuard())
   @UsePipes(new ValidationPipe())
-  createIdea(@User('id') userId, @Body() data: ideaDto) {
+  createIdea(@User('id') userId: string, @Body() data: ideaDto) {
     return this.ideaService.create(userId, data);
   }
 
